@@ -20,7 +20,7 @@ export class UserService {
 
     const user = this.userRepository.create({
       ...rest,
-      password: passwordHash,
+      password_hash: passwordHash,
     });
 
     return UserExposed.FromUser(await this.userRepository.save(user));
@@ -37,10 +37,8 @@ export class UserService {
     );
   }
 
-  async findByEmail(email: string): Promise<UserExposed> {
-    return UserExposed.FromUser(
-      await this.userRepository.findOne({ where: { email } }),
-    );
+  async findByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({ where: { email } });
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<UserExposed> {
