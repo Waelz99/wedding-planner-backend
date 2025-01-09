@@ -7,6 +7,7 @@ export function setupSwagger(app: INestApplication, path: string): void {
     .setDescription(
       'API documentation for the NestJS Wedding Planner application',
     )
+    .addBearerAuth()
     .setVersion('1.0')
     .build();
 
